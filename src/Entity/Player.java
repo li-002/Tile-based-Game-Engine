@@ -9,10 +9,18 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Class representing the player
+ */
 public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
+    /**
+     * Constructor setting initial values
+     * @param gp main panel that the user sees
+     * @param keyH KeyHandler that checks for current keys being pressed
+     */
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
@@ -20,6 +28,9 @@ public class Player extends Entity {
         getPlayerImage();
     }
 
+    /**
+     * Sets default values for position, speed, and direction
+     */
     public void setDefaultValues() {
         x = 100;
         y = 100;
@@ -27,6 +38,9 @@ public class Player extends Entity {
         direction = "down";
     }
 
+    /**
+     * Updates player for different key inputs and image cycling
+     */
     public void update() {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             spriteCounter++;
@@ -60,6 +74,10 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Checks which image of the specific player should be shown at different times and key presses
+     * @param g2 main panel displaying the player
+     */
     public void draw(Graphics g2) {
         BufferedImage image = null;
 
@@ -100,6 +118,9 @@ public class Player extends Entity {
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
     }
 
+    /**
+     * Gets the image from resource source for different positions
+     */
     public void getPlayerImage() {
         try {
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_up_1.png")));

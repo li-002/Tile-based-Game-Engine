@@ -2,6 +2,9 @@ package Entity;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * Superclass for different entities
+ */
 public class Entity {
     public int x, y;
     public int speed;

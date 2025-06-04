@@ -3,13 +3,16 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Tracks which keys are currently being pressed /not-pressed
+ */
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, leftPressed, downPressed, rightPressed;
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // We do not use
+        // Not needed in this game
     }
 
     @Override

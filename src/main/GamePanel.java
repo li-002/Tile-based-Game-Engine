@@ -5,6 +5,9 @@ import Entity.Player;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The main panel that controls the image currently being viewed on the application
+ */
 public class GamePanel extends JPanel implements Runnable {
     final int basicTileSize = 16; // 16x16 object
     final int scale = 4;
@@ -19,6 +22,9 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     Player player = new Player(this, keyH);
 
+    /**
+     * Sets the initial values for the panel being displayed
+     */
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
@@ -27,6 +33,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
+    /**
+     * Initializes a new Thread which constantly looks for and performs the run() method
+     */
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -63,18 +72,22 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Check for and apply changes to different entities
+     */
     public void update() {
         player.update();
     }
 
+    /**
+     * Updates the image of the entity
+     * @param g image representing the entity
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.WHITE);
-
         player.draw(g2);
-
         g2.dispose();
     }
 }
