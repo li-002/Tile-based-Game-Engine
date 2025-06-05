@@ -16,6 +16,9 @@ public class Player extends Entity {
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+
     /**
      * Constructor setting initial values
      * @param gp main panel that the user sees
@@ -24,6 +27,16 @@ public class Player extends Entity {
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth/2 - gp.tileSize/2;
+        screenY = gp.screenHeight/2 - gp.tileSize/2;
+
+        solidArea = new Rectangle();
+        solidArea.x = gp.tileSize / 4;
+        solidArea.y = gp.tileSize / 4;
+        solidArea.height = gp.tileSize / 2;
+        solidArea.width = gp.tileSize / 2;
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -32,8 +45,8 @@ public class Player extends Entity {
      * Sets default values for position, speed, and direction
      */
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 4;
         direction = "down";
     }
@@ -41,8 +54,41 @@ public class Player extends Entity {
     /**
      * Updates player for different key inputs and image cycling
      */
+    @SuppressWarnings("ConstantValue")
     public void update() {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+            if (keyH.upPressed) {
+                direction = "up";
+            }
+            else if (keyH.downPressed) {
+                direction = "down";
+            }
+            else if(keyH.leftPressed) {
+                direction = "left";
+            }
+            else if(keyH.rightPressed) {
+                direction = "right";
+            }
+
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+            if (!collisionOn) {
+                switch(direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
+            }
+
             spriteCounter++;
             if (spriteCounter > 12) {
                 if (spriteNum == 1) {
@@ -55,23 +101,6 @@ public class Player extends Entity {
             }
         }
 
-        if (keyH.upPressed) {
-            direction = "up";
-            y -= speed;
-        }
-        else if (keyH.downPressed) {
-            direction = "down";
-            y += speed;
-
-        }
-        else if(keyH.leftPressed) {
-            direction = "left";
-            x -= speed;
-        }
-        else if(keyH.rightPressed) {
-            direction = "right";
-            x += speed;
-        }
     }
 
     /**
@@ -115,7 +144,7 @@ public class Player extends Entity {
                 }
                 break;
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 
     /**
