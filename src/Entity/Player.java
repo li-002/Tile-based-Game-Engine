@@ -45,8 +45,8 @@ public class Player extends Entity {
      * Sets default values for position, speed, and direction
      */
     public void setDefaultValues() {
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        worldX = gp.tileSize * 4;
+        worldY = gp.tileSize * 29;
         speed = 4;
         direction = "down";
     }
@@ -95,6 +95,9 @@ public class Player extends Entity {
                     spriteNum = 2;
                 }
                 else if (spriteNum == 2) {
+                    spriteNum = 3;
+                }
+                else if (spriteNum == 3) {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
@@ -118,6 +121,9 @@ public class Player extends Entity {
                 else if (spriteNum == 2) {
                     image = up2;
                 }
+                else if (spriteNum == 3) {
+                    image = up3;
+                }
                 break;
             case "down":
                 if (spriteNum == 1) {
@@ -125,6 +131,9 @@ public class Player extends Entity {
                 }
                 else if (spriteNum == 2) {
                     image = down2;
+                }
+                else if (spriteNum == 3) {
+                    image = down3;
                 }
                 break;
             case "left":
@@ -134,6 +143,9 @@ public class Player extends Entity {
                 else if (spriteNum == 2) {
                     image = left2;
                 }
+                else if (spriteNum == 3) {
+                    image = left3;
+                }
                 break;
             case "right":
                 if (spriteNum == 1) {
@@ -141,6 +153,9 @@ public class Player extends Entity {
                 }
                 else if (spriteNum == 2) {
                     image = right2;
+                }
+                else if (spriteNum == 3) {
+                    image = right3;
                 }
                 break;
         }
@@ -152,14 +167,20 @@ public class Player extends Entity {
      */
     public void getPlayerImage() {
         try {
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_up_1.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_up_2.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_left_1.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_left_2.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_right_1.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_right_2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_down_1.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_down_2.png")));
+            sourceImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/players/wizard_red.png")));
+            up1 = sourceImage.getSubimage(0, 48, 16, 16);
+            up2 = sourceImage.getSubimage(16, 48, 16, 16);
+            up3 = sourceImage.getSubimage(32, 48, 16, 16);
+            down1 = sourceImage.getSubimage(0, 0, 16, 16);
+            down2 = sourceImage.getSubimage(16, 0, 16, 16);
+            down3 = sourceImage.getSubimage(32, 0, 16, 16);
+            left1 = sourceImage.getSubimage(0, 16, 16, 16);
+            left2 = sourceImage.getSubimage(16, 16, 16, 16);
+            left3 = sourceImage.getSubimage(32, 16, 16, 16);
+            right1 = sourceImage.getSubimage(0, 32, 16, 16);
+            right2 = sourceImage.getSubimage(16, 32, 16, 16);
+            right3 = sourceImage.getSubimage(32, 32, 16, 16);
+
         }
         catch (IOException e) {
             e.printStackTrace();

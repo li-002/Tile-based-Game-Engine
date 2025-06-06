@@ -19,8 +19,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = maxTileRow * tileSize;
 
     // World Settings
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
+    public final int maxWorldCol = 30;
+    public final int maxWorldRow = 32;
     public final int worldWidth = maxWorldCol * tileSize;
     public final int worldHeight = maxWorldRow * tileSize;
 
@@ -41,6 +41,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+    }
+
+    /**
+     * Places the object on the world map
+     */
+    public void setupGame() {
+        // assetSetter.setObject();
     }
 
     /**
@@ -97,7 +104,9 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
         tileM.draw(g2);
+
         player.draw(g2);
         g2.dispose();
     }
